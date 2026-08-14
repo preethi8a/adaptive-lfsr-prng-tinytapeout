@@ -5,7 +5,7 @@
 
 `default_nettype none
 
-module tt_um_adaptive_lfsr_prng (
+module tt_um_preethi8a_adaptive_lfsr_prng (
     input  wire [7:0] ui_in,
     output wire [7:0] uo_out,
 
@@ -19,20 +19,17 @@ module tt_um_adaptive_lfsr_prng (
 );
 
     // ------------------------------------------------
-    // Tiny Tapeout input mapping
+    // Input mapping
     //
-    // ui_in[7]   = user enable
-    // ui_in[6:0] = external seed
+    // ui_in[7:0] = 8-bit external seed
+    // ena        = design enable
+    // clk        = clock
+    // rst_n      = active-low reset
     // ------------------------------------------------
 
-    wire       user_enable;
     wire [7:0] seed_in;
 
-    assign user_enable = ui_in[7];
-
-    // Convert 7-bit external seed to 8-bit seed.
-    assign seed_in = {1'b0, ui_in[6:0]};
-
+    assign seed_in = ui_in;
 
     // ------------------------------------------------
     // Internal signals
@@ -42,7 +39,6 @@ module tt_um_adaptive_lfsr_prng (
     wire [1:0] poly_status;
     wire       adaptive_event;
 
-
     // ------------------------------------------------
     // Main Adaptive LFSR PRNG
     // ------------------------------------------------
@@ -51,7 +47,7 @@ module tt_um_adaptive_lfsr_prng (
         .clk            (clk),
         .rst_n          (rst_n),
 
-        .enable         (user_enable & ena),
+        .enable         (ena),
         .seed_in        (seed_in),
 
         .random_out     (random_out),
@@ -59,25 +55,24 @@ module tt_um_adaptive_lfsr_prng (
         .adaptive_event (adaptive_event)
     );
 
-
     // ------------------------------------------------
-    // Tiny Tapeout outputs
+    // Tiny Tapeout output mapping
+    //
+    // uo_out[7:0] = 8-bit random output
     // ------------------------------------------------
 
     assign uo_out = random_out;
 
+    // ------------------------------------------------
+    // Bidirectional pins unused
+    // ------------------------------------------------
 
-    // Bidirectional pins are unused.
     assign uio_out = 8'b0;
     assign uio_oe  = 8'b0;
 
-
-    // Prevent unused-input warnings.
+    // Prevent unused-input warnings
     wire _unused;
-    assign _unused = &{
-        uio_in,
-        1'b0
-    };
+    assign _unused = &{uio_in, poly_status, adaptive_event, 1'b0};
 
 endmodule
 
