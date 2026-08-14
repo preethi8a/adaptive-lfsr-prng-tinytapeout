@@ -21,7 +21,9 @@ module tt_um_preethi8a_adaptive_lfsr_prng (
     // ------------------------------------------------
     // Input mapping
     //
-    // ui_in[7:0] = 8-bit external seed
+    
+    // ui_in[7]   = PRNG enable
+    // ui_in[6:0] = 7-bit external seed
     // ena        = design enable
     // clk        = clock
     // rst_n      = active-low reset
