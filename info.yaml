@@ -22,17 +22,17 @@ source_files:
 
 pinout:
 
-  # Inputs
-  ui[0]: "External seed bit 0"
-  ui[1]: "External seed bit 1"
-  ui[2]: "External seed bit 2"
-  ui[3]: "External seed bit 3"
-  ui[4]: "External seed bit 4"
-  ui[5]: "External seed bit 5"
-  ui[6]: "External seed bit 6"
+  # Input controls
+  ui[0]: "Seed bit 0"
+  ui[1]: "Seed bit 1"
+  ui[2]: "Seed bit 2"
+  ui[3]: "Seed bit 3"
+  ui[4]: "Seed bit 4"
+  ui[5]: "Seed bit 5"
+  ui[6]: "Seed bit 6"
   ui[7]: "PRNG enable"
 
-  # Outputs
+  # Outputs: 8-bit pseudo-random output
   uo[0]: "Random output bit 0"
   uo[1]: "Random output bit 1"
   uo[2]: "Random output bit 2"
