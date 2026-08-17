@@ -8,21 +8,19 @@ project:
   language: "Verilog"
   clock_hz: 50000000
 
-tiles: "1x1"
+  tiles: "1x1"
 
-top_module: "tt_um_preethi8a_adaptive_lfsr_prng"
+  top_module: "tt_um_preethi8a_adaptive_lfsr_prng"
 
-source_files:
-  - "project.v"
-  - "adaptive_lfsr_prng.v"
-  - "lfsr16.v"
-  - "repetition_monitor.v"
-  - "adaptive_controller.v"
-  - "seed_generator.v"
+  source_files:
+    - "project.v"
+    - "adaptive_lfsr_prng.v"
+    - "lfsr16.v"
+    - "repetition_monitor.v"
+    - "adaptive_controller.v"
+    - "seed_generator.v"
 
 pinout:
-
-  # Input controls
   ui[0]: "Seed bit 0"
   ui[1]: "Seed bit 1"
   ui[2]: "Seed bit 2"
@@ -32,7 +30,6 @@ pinout:
   ui[6]: "Seed bit 6"
   ui[7]: "PRNG enable"
 
-  # Outputs: 8-bit pseudo-random output
   uo[0]: "Random output bit 0"
   uo[1]: "Random output bit 1"
   uo[2]: "Random output bit 2"
@@ -42,7 +39,6 @@ pinout:
   uo[6]: "Random output bit 6"
   uo[7]: "Random output bit 7"
 
-  # Bidirectional pins unused
   uio[0]: ""
   uio[1]: ""
   uio[2]: ""
