@@ -5,9 +5,8 @@
 SIM ?= verilator
 FST ?= -fst
 TOPLEVEL_LANG ?= verilog
-
+COMPILE_ARGS += --prefix Vtop
 SRC_DIR = $(PWD)/../src
-
 # Verilator needs timing because tb.v contains # delays
 COMPILE_ARGS += --timing
 COMPILE_ARGS += --Wno-TIMESCALEMOD
@@ -37,6 +36,7 @@ else
 # Gate-level simulation
 # ---------------------------------------------------------
 SIM_BUILD = sim_build/gl
+
 
 COMPILE_ARGS += -DGL_TEST
 COMPILE_ARGS += -DFUNCTIONAL
