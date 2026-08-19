@@ -9,7 +9,7 @@ COMPILE_ARGS += --prefix Vtop
 SRC_DIR = $(PWD)/../src
 # Verilator needs timing because tb.v contains # delays
 COMPILE_ARGS += --timing
-COMPILE_ARGS += --Wno-TIMESCALEMOD
+COMPILE_ARGS += --Wno-TIMESCALEMOD 
 # ---------------------------------------------------------
 # All RTL source files
 # ---------------------------------------------------------
