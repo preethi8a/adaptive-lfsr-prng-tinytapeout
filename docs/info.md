@@ -40,3 +40,8 @@ The PRNG is enabled using `ui_in[7]`. The external seed is supplied through `ui_
 11. Verify that the cooldown period prevents immediate subsequent adaptive events.
 
 The Cocotb testbench in `test/test.py` performs the basic functional verification of the PRNG, including reset, seeding, LFSR operation, output generation, and re-enabling behavior.
+## Credits
+
+We gratefully acknowledge the Center of Excellence (CoE) in Integrated Circuits and Systems (ICAS) and the Department of Electronics and Communication Engineering (ECE) for providing the necessary resources and guidance.
+
+Special thanks to Dr. H V Ravish Aradhya (HoD- ECE), Dr. K R Usha Rani (Associate Dean-PG), Dr. K. S. Geetha (Vice Principal) and Dr. K. N. Subramanya (Principal) for their constant encouragement and support in facilitating this Tiny Tapeout SKY26C submission.
