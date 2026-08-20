@@ -2,7 +2,7 @@
 
 project:
   title: "Self-Seeding Adaptive 16-bit Galois LFSR PRNG"
-  author: "Preethi S A, Khushi Vishwanath"
+  author: "Preethi S A, Khushi Vishwanath, Shylashree N, RV College Of Engineering"
   discord: ""
   description: "A compact 16-bit Galois LFSR PRNG with deterministic self-seeding, automatic polynomial switching, repetition detection, and cooldown control."
   language: "Verilog"
