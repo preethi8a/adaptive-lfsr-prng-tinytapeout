@@ -28,12 +28,6 @@ The verification environment checks the major functional blocks of the PRNG, inc
 - Continued LFSR operation after polynomial switching
 
 ## RTL Simulation
-
-To run the RTL simulation, activate the Tiny Tapeout Python environment and run:
-
-```bash
-make -B
-
 The simulation uses the RTL source specified in the Makefile and runs the Cocotb testbench.
 
 The generated waveform can be inspected using GTKWave or Surfer.
@@ -105,4 +99,10 @@ The design was subsequently hardened using the Tiny Tapeout SKY130 digital flow.
 
 The final GDSII layout passed the Tiny Tapeout precheck, with all required precheck tests passing.
 
-For complete project information, architecture, implementation details, and physical-design results, see the main project README.
+For complete project information, architecture, implementation details, and physical-design results, see [main project README](../README.md).
+
+## References
+
+- [Tiny Tapeout](https://tinytapeout.com/)
+- [Cocotb Documentation](https://docs.cocotb.org/en/stable/)
+- [Tiny Tapeout HDL Testing](https://tinytapeout.com/hdl/testing/)
