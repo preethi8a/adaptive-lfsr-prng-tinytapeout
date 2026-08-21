@@ -1,42 +1,76 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg) ![](../../workflows/fpga/badge.svg)
+# Adaptive Self-Seeding 16-bit Galois LFSR PRNG
 
-# Tiny Tapeout Verilog Project Template
+A compact 16-bit Galois Linear Feedback Shift Register (LFSR) based Pseudo-Random Number Generator (PRNG) designed for Tiny Tapeout using the SKY130 open-source PDK.
 
-- [Read the documentation for project](docs/info.md)
+## Project Overview
 
-## What is Tiny Tapeout?
+This project implements a **self-seeding and adaptive 16-bit Galois LFSR-based Pseudo-Random Number Generator (PRNG)**.
 
-Tiny Tapeout is an educational project that aims to make it easier and cheaper than ever to get your digital and analog designs manufactured on a real chip.
+Conventional LFSR-based PRNGs require an external non-zero seed and normally operate using a fixed feedback polynomial. The proposed design addresses these limitations by incorporating **internal self-seeding** and **adaptive polynomial selection**.
 
-To learn more and get started, visit https://tinytapeout.com.
+The design automatically initializes the LFSR with a non-zero seed and monitors the generated output sequence. When consecutive output samples become identical, an adaptive event is triggered and the feedback polynomial is changed to a different primitive polynomial. This helps avoid prolonged repetition and improves the robustness of the generated pseudo-random sequence.
 
-## Set up your Verilog project
+The design is intended as a compact and low-area digital PRNG suitable for applications such as:
 
-1. Add your Verilog files to the `src` folder.
-2. Edit the [info.yaml](info.yaml) and update information about your project, paying special attention to the `source_files` and `top_module` properties. If you are upgrading an existing Tiny Tapeout project, check out our [online info.yaml migration tool](https://tinytapeout.github.io/tt-yaml-upgrade-tool/).
-3. Edit [docs/info.md](docs/info.md) and add a description of your project.
-4. Adapt the testbench to your design. See [test/README.md](test/README.md) for more information.
+- Built-In Self-Test (BIST)
+- Hardware security
+- Digital testing
+- Randomized digital logic
+- Embedded systems
+- Lightweight cryptographic and security applications
 
-The GitHub action will automatically build the ASIC files using [LibreLane](https://www.zerotoasiccourse.com/terminology/librelane/).
+## Key Features
 
-## Enable GitHub actions to build the results page
+- **16-bit Galois LFSR architecture**
+- **Self-seeding mechanism**
+- **Three selectable primitive feedback polynomials**
+- **Adaptive feedback polynomial selection**
+- Detection of **consecutive repeated 8-bit outputs**
+- Automatic adaptation when a repetition event is detected
+- Lower 8 bits used as the pseudo-random output
+- Fully synchronous digital implementation
+- Designed for **SKY130** technology
+- Compatible with **Tiny Tapeout**
+- Compact hardware implementation
 
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
+## Architecture
 
-## Resources
+The major functional blocks of the design are:
 
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://tinytapeout.com/discord)
-- [Build your design locally](https://www.tinytapeout.com/guides/local-hardening/)
-
-## What next?
-
-- [Submit your design to the next shuttle](https://app.tinytapeout.com/).
-- Edit [this README](README.md) and explain your design, how it works, and how to test it.
-- Share your project on your social network of choice:
-  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [@TinyTapeout](https://www.linkedin.com/company/100708654/)
-  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
-  - X (formerly Twitter) [#tinytapeout](https://twitter.com/hashtag/tinytapeout) [@tinytapeout](https://twitter.com/tinytapeout)
-  - Bluesky [@tinytapeout.com](https://bsky.app/profile/tinytapeout.com)
+```text
+             +----------------------+
+             |   Self-Seeding       |
+             |      Logic           |
+             +----------+-----------+
+                        |
+                        v
+             +----------------------+
+             |    16-bit Galois     |
+             |       LFSR           |
+             +----------+-----------+
+                        |
+                        v
+             +----------------------+
+             |   8-bit Output       |
+             |     Selection        |
+             +----------+-----------+
+                        |
+                        v
+                  PRNG Output
+                    [7:0]
+                        |
+                        v
+             +----------------------+
+             | Consecutive Output   |
+             | Repetition Detector  |
+             +----------+-----------+
+                        |
+                  Adaptive Event
+                        |
+                        v
+             +----------------------+
+             | Feedback Polynomial  |
+             |     Selection        |
+             +----------------------+
+                        |
+                        +----> LFSR
