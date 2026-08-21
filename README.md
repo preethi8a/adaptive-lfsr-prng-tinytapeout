@@ -61,7 +61,8 @@ Shylashree N
 RV College of Engineering (RVCE), Bengaluru
 
 ## Resources
-Tiny Tapeout
-Tiny Tapeout FAQ
-Digital Design Lessons
-Build Your Design Locally
+
+- [Tiny Tapeout](https://tinytapeout.com/)
+- [Tiny Tapeout FAQ](https://tinytapeout.com/faq/)
+- [Digital Design Lessons](https://tinytapeout.com/digital_design/)
+- [Build Your Design Locally](https://www.tinytapeout.com/guides/local-hardening/)
