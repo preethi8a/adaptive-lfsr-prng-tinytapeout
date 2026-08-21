@@ -36,8 +36,6 @@ jobs:
 
       - name: GL test
         uses: TinyTapeout/tt-gds-action/gl_test@ttsky26c
-        with:
-          pdk: sky130A
 
   viewer:
     needs: gds
