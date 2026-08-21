@@ -1,76 +1,67 @@
 # Adaptive Self-Seeding 16-bit Galois LFSR PRNG
 
-A compact 16-bit Galois Linear Feedback Shift Register (LFSR) based Pseudo-Random Number Generator (PRNG) designed for Tiny Tapeout using the SKY130 open-source PDK.
+**Tiny Tapeout submission, SKY130 130nm, TTSKY26C shuttle**
 
-## Project Overview
+- [Read the full project documentation](docs/info.md)
+- [View the project repository](https://github.com/preethi8a/adaptive-lfsr-prng-tinytapeout)
 
-This project implements a **self-seeding and adaptive 16-bit Galois LFSR-based Pseudo-Random Number Generator (PRNG)**.
+## What is this?
 
-Conventional LFSR-based PRNGs require an external non-zero seed and normally operate using a fixed feedback polynomial. The proposed design addresses these limitations by incorporating **internal self-seeding** and **adaptive polynomial selection**.
+This project implements a compact **16-bit Galois Linear Feedback Shift Register (LFSR) based Pseudo-Random Number Generator (PRNG)** with an integrated self-seeding and adaptive feedback mechanism.
 
-The design automatically initializes the LFSR with a non-zero seed and monitors the generated output sequence. When consecutive output samples become identical, an adaptive event is triggered and the feedback polynomial is changed to a different primitive polynomial. This helps avoid prolonged repetition and improves the robustness of the generated pseudo-random sequence.
+Unlike a conventional LFSR that requires an externally provided seed and normally operates with a fixed feedback polynomial, this design incorporates **internal self-seeding** and supports **three selectable primitive feedback polynomials**.
 
-The design is intended as a compact and low-area digital PRNG suitable for applications such as:
+The lower 8 bits of the LFSR state are used as the PRNG output. The generated output is continuously monitored for consecutive repetition. When the same 8-bit output is detected for two consecutive samples, an adaptive event is generated and the feedback polynomial is changed, allowing the LFSR to continue operation with a different feedback configuration.
 
-- Built-In Self-Test (BIST)
-- Hardware security
-- Digital testing
-- Randomized digital logic
-- Embedded systems
-- Lightweight cryptographic and security applications
+The complete design was implemented through the **Tiny Tapeout SKY130 digital ASIC flow**, generating a final GDSII layout suitable for submission.
 
-## Key Features
+## Design summary
 
-- **16-bit Galois LFSR architecture**
-- **Self-seeding mechanism**
-- **Three selectable primitive feedback polynomials**
-- **Adaptive feedback polynomial selection**
-- Detection of **consecutive repeated 8-bit outputs**
-- Automatic adaptation when a repetition event is detected
-- Lower 8 bits used as the pseudo-random output
-- Fully synchronous digital implementation
-- Designed for **SKY130** technology
-- Compatible with **Tiny Tapeout**
-- Compact hardware implementation
+- **Architecture:** 16-bit Galois LFSR
+- **Function:** Pseudo-Random Number Generation
+- **Seed:** Internally generated / self-seeded
+- **Feedback:** Three selectable primitive polynomials
+- **PRNG output:** Lower 8 bits of the LFSR state
+- **Adaptation:** Consecutive 8-bit output repetition detection
+- **HDL:** Verilog
+- **Technology:** SKY130 130nm
+- **Target:** Tiny Tapeout SKY26C
+- **Top module:** `tt_um_preethi8a_adaptive_lfsr_prng`
+- **Implementation:** RTL-to-GDSII
+- **Physical verification:** Tiny Tapeout precheck passed
+- **Precheck result:** 15/15 tests passed
 
-## Architecture
+## How does it work?
 
-The major functional blocks of the design are:
+The PRNG begins by initializing the 16-bit LFSR with a valid non-zero seed using the internal self-seeding mechanism.
 
-```text
-             +----------------------+
-             |   Self-Seeding       |
-             |      Logic           |
-             +----------+-----------+
-                        |
-                        v
-             +----------------------+
-             |    16-bit Galois     |
-             |       LFSR           |
-             +----------+-----------+
-                        |
-                        v
-             +----------------------+
-             |   8-bit Output       |
-             |     Selection        |
-             +----------+-----------+
-                        |
-                        v
-                  PRNG Output
-                    [7:0]
-                        |
-                        v
-             +----------------------+
-             | Consecutive Output   |
-             | Repetition Detector  |
-             +----------+-----------+
-                        |
-                  Adaptive Event
-                        |
-                        v
-             +----------------------+
-             | Feedback Polynomial  |
-             |     Selection        |
-             +----------------------+
-                        |
-                        +----> LFSR
+During normal operation, the Galois LFSR updates its state on every clock cycle according to the currently selected feedback polynomial.
+
+The lower 8 bits of the LFSR state are provided as the pseudo-random output.
+
+The output is simultaneously monitored by storing the previous 8-bit output and comparing it with the current output.
+
+When two consecutive 8-bit outputs are identical, the repetition detector generates an adaptive event. The polynomial-selection logic then switches the LFSR to another available primitive feedback polynomial. Thus, the overall architecture combines:
+Self-Seeding + Galois LFSR + Multiple Feedback Polynomials + Output Monitoring + Adaptive Polynomial Selection
+
+## What is Tiny Tapeout?
+Tiny Tapeout is an educational project that makes it easier and more affordable to manufacture small digital and analog designs on real silicon.
+
+To learn more, visit:
+
+https://tinytapeout.com/
+
+## Project Team
+This project was executed by:
+
+Preethi Aralikatti
+Khushi Vishwanath
+Shylashree N
+
+RV College of Engineering (RVCE), Bengaluru
+
+## Resources
+Tiny Tapeout
+Tiny Tapeout FAQ
+Digital Design Lessons
+Build Your Design Locally
