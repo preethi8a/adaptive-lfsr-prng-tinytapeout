@@ -54,8 +54,8 @@ https://tinytapeout.com/
 ## Project Team
 This project was executed by:
 
-Preethi Aralikatti
-Khushi Vishwanath
+Preethi Aralikatti,
+Khushi Vishwanath,
 Shylashree N
 
 RV College of Engineering (RVCE), Bengaluru
